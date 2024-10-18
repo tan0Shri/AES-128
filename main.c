@@ -1,7 +1,5 @@
 #include<stdio.h>
-
-// Include AES-128 header file containing required functions
-#include "header.h"
+#include "utility.h"
 
 int main() {
 //---------Key Generation Process---------------------------------------------
@@ -13,9 +11,21 @@ int main() {
     word w[Nb * (Nr + 1)];
     KeyExpansion(key, w);
     
+    int mode;
+    printf("Enter the index of mode of operations which you want to apply for encryption, decryption:\n\
+    		1. ECB: Electronic Codebook mode\n\
+    		2. CBC: Cipher Block Chaining mode\n\
+		3. OFB: Output Feedback mode\n\
+		4. CFB: Cipher Feedback\n\
+		(type the number only)");
+    scanf("%d",&mode);
+    
+    void (*enc_ptr[4])(FILE*, word*, FILE*) = {ecb_enc, cbc_enc, ofb_enc, cfb_enc};
+    void (*dec_ptr[4])(FILE*, word*, FILE*) = {ecb_dec, cbc_dec, ofb_dec, cfb_dec};
+    
 //---------Encryption Process (ECB mode)-----------------------------------------------------
     // Open input and output files for encryption
-    FILE* in = fopen("example.pdf", "r");
+    FILE* in = fopen("nist.fips.197.pdf", "r");
     if (in == NULL) {
         printf("Error: Unable to open input file.\n");
         return 1;
@@ -28,8 +38,8 @@ int main() {
         return 1;
     }
     
-    
-    ecb_enc(in, w, out);
+    //Caling encryption function for chosen mode
+    enc_ptr[mode-1](in, w, out);
 
     fclose(in);
     fclose(out);
@@ -48,9 +58,9 @@ int main() {
         return 1;
     }
     
-    ecb_dec(in, w, out);
+    //calling decryption function for chosen mode
+    dec_ptr[mode-1](in, w, out);
     
-
     fclose(in);
     fclose(out);
     

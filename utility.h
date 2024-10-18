@@ -1,3 +1,6 @@
+#ifndef HEADER_H
+#define HEADER_H
+
 #include<stdio.h>
 
 //For AES algorithm, irreducible polynomial is: x^8 + x^4 + x^3 + x +1
@@ -49,8 +52,27 @@ void InvMixcolumns(byte state[4][Nb]);
 void AES_Decrypt(byte in[4 * Nb], byte out[4 * Nb], const word w[Nb * (Nr + 1)]);
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
-//ECB mode 
+//Modes of Operation
 void pad(byte block[4 * Nb], int bytesRead);
 int unpad(byte block[4 * Nb]);
+void xorBlocks(byte *a, byte *b, byte *result, int length);
+
+
+//ECB mode 
 void ecb_enc(FILE *in, word *w, FILE *out);
 void ecb_dec(FILE *in, word *w, FILE *out);
+
+//CBC mode
+void cbc_enc(FILE *in, word *w, FILE *out);
+void cbc_dec(FILE *in, word *w, FILE *out);
+
+//OFB mode
+void ofb_enc(FILE *in, word *w, FILE *out);
+void ofb_dec(FILE *in, word *w, FILE *out);
+
+//CFB mode
+void cfb_enc(FILE *in, word *w, FILE *out);
+void cfb_dec(FILE *in, word *w, FILE *out);
+
+#endif
+

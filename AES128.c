@@ -1,4 +1,4 @@
-#include"header.h"
+#include"utility.h"
     
 //AES S-box: array containing substitution values for the byte xy (in hex format)
 const byte SBox[256] = {
