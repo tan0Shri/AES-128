@@ -23,4 +23,4 @@ This project implements the AES-128 Encryption and Decryption in C, supporting d
 
 #### When prompted:
 - Select the mode of operation for encryption, decryption.
-- - Enter the names of the files. 
+- Enter the names of the files. 
