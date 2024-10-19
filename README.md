@@ -18,3 +18,9 @@ This project implements the AES-128 Encryption and Decryption in C, supporting d
 3. Compile the program using:
    ```bash
    gcc -o main main.c AES128.c modes.c
+4. Run the program using:
+   `./main`
+
+#### When prompted:
+- Select the mode of operation for encryption, decryption.
+- - Enter the names of the files. 
